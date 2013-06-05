@@ -1,4 +1,4 @@
-#include "lib/iscreenshot.h"
+#include "callback.h"
 
 int main(int argc,char **argv)
 {}
