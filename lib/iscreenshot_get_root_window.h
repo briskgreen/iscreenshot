@@ -3,6 +3,6 @@
 #ifndef _ISCREENSHOT__GET_ROOT_WINDOW_H
 #define _ISCREENSHOT_GET_ROOT_WINDOW_H
 
-#include <gtk/gtk.h>
+#include "iscreenshot.h"
 
 #endif
