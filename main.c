@@ -1,4 +1,4 @@
-#include "iscreenshot_get_root_window.h"
+#include "lib/iscreenshot.h"
 
 int main(int argc,char **argv)
 {}
