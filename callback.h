@@ -5,4 +5,6 @@
 
 #include "lib/iscreenshot.h"
 
+void really_quit(GtkWidget *widget,gpointer data);
+
 #endif
