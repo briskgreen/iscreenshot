@@ -5,6 +5,8 @@
 
 #include "lib/iscreenshot.h"
 
+typedef void (*callback)(GtkWidget *widget,gpointer data);
+
 typedef struct
 {
 	IS_SELECT *is_select;
