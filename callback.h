@@ -5,6 +5,12 @@
 
 #include "lib/iscreenshot.h"
 
+typedef struct
+{
+	IS_SELECT *is_select;
+	GtkWidget *select[4];
+}DATA;
+
 void really_quit(GtkWidget *widget,gpointer data);
 
 #endif

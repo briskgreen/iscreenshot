@@ -14,9 +14,12 @@ int main(int argc,char **argv)
 	GtkWidget *vbox;
 	GtkWidget *frame;
 	IS_SELECT is_select;
+	DATA data;
 
 	change_path(argv[0]);
 	init_data(&is_select);
+	data.is_select=&is_select;
+
 	gtk_init(&argc,&argv);
 
 	win=gtk_window_new(GTK_WINDOW_TOPLEVEL);
