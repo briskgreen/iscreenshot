@@ -11,12 +11,4 @@
 #include "iscreenshot_save_to_file.h"
 #include <gtk/gtk.h>
 
-typedef struct
-{
-	gboolean is_root_window;
-	gboolean is_active_window;
-	gboolean is_rectangle_window;
-	time_t is_time;
-}IS_SELECT;
-
 #endif

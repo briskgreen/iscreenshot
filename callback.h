@@ -9,9 +9,12 @@ typedef void (*callback)(GtkWidget *widget,gpointer data);
 
 typedef struct
 {
-	IS_SELECT *is_select;
-	GtkWidget *select[4];
-}DATA;
+	gboolean is_root_window;
+	gboolean is_active_window;
+	gboolean is_rectangle_window;
+	time_t is_time;
+	int is_index;
+}IS_SELECT;
 
 void really_quit(GtkWidget *widget,gpointer data);
 
