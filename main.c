@@ -45,6 +45,23 @@ int main(int argc,char **argv)
 	frame=gtk_frame_new("Delay before capturing");
 	gtk_box_pack_start(GTK_BOX(hbox),frame,FALSE,FALSE,0);
 	create_select_time(frame,&is_select);
+
+	hbox=gtk_hbox_new(FALSE,0);
+	gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
+
+	button=gtk_button_new_from_stock(GTK_STOCK_CANCEL);
+	gtk_box_pack_end(GTK_BOX(hbox),button,FALSE,FALSE,5);
+	g_signal_connect(G_OBJECT(button),"clicked",
+			G_CALLBACK(really_quit),NULL);
+
+	button=gtk_button_new_from_stock(GTK_STOCK_OK);
+	gtk_box_pack_end(GTK_BOX(hbox),button,FALSE,FALSE,5);
+	g_signal_connect(G_OBJECT(button),"clicked",
+			G_CALLBACK(screenshot),&is_select);
+
+	gtk_widget_show_all(win);
+
+	gtk_main();
 }
 
 void change_path(const char *path)
@@ -79,6 +96,7 @@ void init_data(IS_SELECT *is_select)
 	is_select->is_rectangle_window=FALSE;
 	is_select->is_time=0;
 	is_select->is_index=1;
+	is_select->pixbuf=NULL;
 }
 
 void create_title_screen(GtkWidget *vbox)

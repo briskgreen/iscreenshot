@@ -5,4 +5,6 @@
 
 #include "iscreenshot.h"
 
+GdkPixbuf *iscreenshot_get_active_window(time_t t);
+
 #endif

@@ -14,6 +14,7 @@ typedef struct
 	gboolean is_rectangle_window;
 	time_t is_time;
 	int is_index;
+	GdkPixbuf *pixbuf;
 }IS_SELECT;
 
 void really_quit(GtkWidget *widget,gpointer data);
