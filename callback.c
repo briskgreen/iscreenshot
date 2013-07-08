@@ -62,4 +62,30 @@ void set_timeout(GtkWidget *widget,IS_SELECT *is_select)
 {}
 
 void screenshot(GtkWidget *widget,IS_SELECT *is_select)
-{}
+{
+	GdkPixbuf *pixbuf;
+	GdkColor color;
+
+	gtk_widget_destroy(is_select->win);
+	gtk_main_quit();
+
+	bzero(&color,sizeof(GdkColor));
+
+	switch(is_select->is_index)
+	{
+		case 1:
+			pixbuf=iscreenshot_get_root_window(is_select->is_time);
+			break;
+		case 2:
+			pixbuf=iscreenshot_get_active_window(is_select->is_time);
+			break;
+		case 3:
+			pixbuf=iscreenshot_get_rectangle_window(
+					&color,is_select->is_time,0.8);
+			break;
+		default:
+			return;
+	}
+
+	iscreenshot_save(pixbuf);
+}

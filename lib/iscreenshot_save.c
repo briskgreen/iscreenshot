@@ -22,7 +22,7 @@ void iscreenshot_save(GdkPixbuf *pixbuf)
 	g_signal_connect(G_OBJECT(win),"delete_event",G_CALLBACK(gtk_main_quit),NULL);
 
 	box=gtk_vbox_new(FALSE,0);
-	gtk_container_add(GTK_CONTAINER(win),vbox);
+	gtk_container_add(GTK_CONTAINER(win),box);
 	hbox=gtk_hbox_new(FALSE,0);
 	gtk_box_pack_start(GTK_BOX(box),hbox,FALSE,FALSE,0);
 	vbox=gtk_vbox_new(FALSE,0);

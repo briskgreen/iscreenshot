@@ -2,7 +2,7 @@
 #include <string.h>
 
 void change_path(const char *path);
-void init_data(IS_SELECT *is_select);
+void init_data(IS_SELECT *is_select,GtkWidget *win);
 void create_title_screen(GtkWidget *vbox);
 void create_radio_button(GtkWidget *frame,IS_SELECT *is_select);
 void create_select_time(GtkWidget *frame,IS_SELECT *is_select);
@@ -17,7 +17,6 @@ int main(int argc,char **argv)
 	IS_SELECT is_select;
 
 	change_path(argv[0]);
-	init_data(&is_select);
 
 	gtk_init(&argc,&argv);
 
@@ -28,6 +27,7 @@ int main(int argc,char **argv)
 			"img/64x64/iscreenshot.png",NULL);
 	g_signal_connect(G_OBJECT(win),"delete_event",
 			G_CALLBACK(really_quit),NULL);
+	init_data(&is_select,win);
 
 	vbox=gtk_vbox_new(FALSE,0);
 	gtk_container_add(GTK_CONTAINER(win),vbox);
@@ -50,15 +50,15 @@ int main(int argc,char **argv)
 	hbox=gtk_hbox_new(FALSE,0);
 	gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
 
-	button=gtk_button_new_from_stock(GTK_STOCK_CANCEL);
-	gtk_box_pack_end(GTK_BOX(hbox),button,FALSE,FALSE,5);
-	g_signal_connect(G_OBJECT(button),"clicked",
-			G_CALLBACK(really_quit),NULL);
-
 	button=gtk_button_new_from_stock(GTK_STOCK_OK);
-	gtk_box_pack_end(GTK_BOX(hbox),button,FALSE,FALSE,5);
+	gtk_box_pack_end(GTK_BOX(hbox),button,FALSE,FALSE,10);
 	g_signal_connect(G_OBJECT(button),"clicked",
 			G_CALLBACK(screenshot),&is_select);
+
+	button=gtk_button_new_from_stock(GTK_STOCK_CANCEL);
+	gtk_box_pack_end(GTK_BOX(hbox),button,FALSE,FALSE,10);
+	g_signal_connect(G_OBJECT(button),"clicked",
+			G_CALLBACK(really_quit),NULL);
 
 	gtk_widget_show_all(win);
 
@@ -90,8 +90,9 @@ void change_path(const char *path)
 	}
 }
 
-void init_data(IS_SELECT *is_select)
+void init_data(IS_SELECT *is_select,GtkWidget *win)
 {
+	is_select->win=win;
 	is_select->is_root_window=FALSE;
 	is_select->is_active_window=FALSE;
 	is_select->is_rectangle_window=FALSE;

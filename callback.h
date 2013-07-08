@@ -9,6 +9,7 @@ typedef void (*callback)(GtkWidget *widget,gpointer data);
 
 typedef struct
 {
+	GtkWidget *win;
 	gboolean is_root_window;
 	gboolean is_active_window;
 	gboolean is_rectangle_window;
