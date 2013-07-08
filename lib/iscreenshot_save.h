@@ -4,6 +4,10 @@
 #define _ISCREENSHOT_SAVE_H
 
 #include <gtk/gtk.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <unistd.h>
 
 void iscreenshot_save(GdkPixbuf *pixbuf);
 

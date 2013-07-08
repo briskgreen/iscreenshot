@@ -1,8 +1,8 @@
 LIBS=`pkg-config --cflags --libs gtk+-2.0`
 IS_LIBS=iscreenshot.o iscreenshot_get_active_window.o iscreenshot_save.o iscreenshot_get_rectangle_window.o iscreenshot_get_root_window.o
 
-is_select:main.o callback.o $(IS_LIBS)
-	gcc -o is_select main.o callback.o $(IS_LIBS) $(LIBS)
+iscreenshot:main.o callback.o $(IS_LIBS)
+	gcc -o iscreenshot main.o callback.o $(IS_LIBS) $(LIBS)
 
 main.o:main.c callback.h
 	gcc -c main.c $(LIBS)
@@ -26,4 +26,4 @@ iscreenshot_save.o:lib/iscreenshot_save.c
 	gcc -c lib/iscreenshot_save.c $(LIBS)
 
 clean:
-	rm is_select *.o
+	rm iscreenshot *.o

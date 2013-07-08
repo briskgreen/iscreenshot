@@ -57,10 +57,59 @@ void iscreenshot_save(GdkPixbuf *pixbuf)
 }
 
 void iscreenshot_save_to_file(GtkWidget *widget,GdkPixbuf *pixbuf)
-{}
+{
+	GtkWidget *file;
+	gint status;
+	char *name="IScreenShot ";
+	char *png=".png";
+	char *file_name;
+	char *temp;
+	time_t t;
+
+	t=time(NULL);
+	temp=ctime(&t);
+	file_name=malloc(strlen(name)+strlen(temp)+strlen(png));
+	bzero(file_name,strlen(name)+strlen(temp)+strlen(png));
+	strncpy(file_name,name,strlen(name));
+	strncat(file_name,temp,strlen(temp)-1);
+	strncat(file_name,png,strlen(png));
+
+	file=gtk_file_chooser_dialog_new("Save File",NULL,
+			GTK_FILE_CHOOSER_ACTION_SAVE,
+			GTK_STOCK_CANCEL,GTK_RESPONSE_CANCEL,
+			GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
+	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(file),
+			getcwd(NULL,0));
+	gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(file),file_name);
+	status=gtk_dialog_run(GTK_DIALOG(file));
+
+	switch(status)
+	{
+		case GTK_RESPONSE_OK:
+			temp=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(file));
+			gdk_pixbuf_save(pixbuf,temp,"png",NULL,
+					"quality","100",NULL);
+			break;
+		case GTK_RESPONSE_CANCEL:
+		default:
+			break;
+	}
+
+	free(file_name);
+	gtk_widget_destroy(file);
+	gtk_main_quit();
+}
 
 void iscreenshot_save_to_clipboard(GtkWidget *widget,GdkPixbuf *pixbuf)
-{}
+{
+	GtkClipboard *clip;
+
+	clip=gtk_clipboard_get(gdk_atom_intern_static_string("CLIPBOARD"));
+	gtk_clipboard_clear(clip);
+	gtk_clipboard_set_image(clip,pixbuf);
+
+	gtk_main_quit();
+}
 
 void iscreenshot_save_only_show(GtkWidget *widget,GdkPixbuf *pixbuf)
 {}
