@@ -36,3 +36,8 @@ void really_quit(GtkWidget *widget,gpointer data)
 
 	gtk_widget_destroy(dialog);
 }
+
+vois set_select(GtkWidget *widget,IS_SELECT *is_select)
+{
+	printf("%d\n",is_select->is_index);
+}
