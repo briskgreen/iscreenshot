@@ -3,7 +3,9 @@
 #ifndef _ISCREENSHOT_GET_RECTANGLE_WINDOW_H
 #define _ISCREENSHOT_GET_RECTANGLE_WINDOW_H
 
-#include "iscreenshot.h"
+#include <stdlib.h>
+#include <gtk/gtk.h>
+#include <time.h>
 
 typedef struct
 {

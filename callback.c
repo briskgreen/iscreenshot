@@ -9,7 +9,7 @@ void really_quit(GtkWidget *widget,gpointer data)
 	dialog=gtk_dialog_new();
 
 	gtk_window_set_title(GTK_WINDOW(dialog),"Really Quit");
-	gtk_window_set_icon_from_file("img/64x64/quit.png",NULL);
+	gtk_window_set_icon_from_file(GTK_WINDOW(dialog),"img/64x64/quit.png",NULL);
 	label=gtk_label_new("Are You Really Want To Quit Application Now?\nClick OK To Quit,Click NO To Continue!");
 
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox),label,
@@ -37,7 +37,29 @@ void really_quit(GtkWidget *widget,gpointer data)
 	gtk_widget_destroy(dialog);
 }
 
-vois set_select(GtkWidget *widget,IS_SELECT *is_select)
+void set_get_root_window(GtkWidget *widget,gpointer data)
 {
-	printf("%d\n",is_select->is_index);
+	IS_SELECT *is_select=(IS_SELECT *)data;
+
+	is_select->is_index=1;
 }
+
+void set_get_active_window(GtkWidget *widget,gpointer data)
+{
+	IS_SELECT *is_select=(IS_SELECT *)data;
+
+	is_select->is_index=2;
+}
+
+void set_get_rectangle_window(GtkWidget *widget,gpointer data)
+{
+	IS_SELECT *is_select=(IS_SELECT *)data;
+
+	is_select->is_index=3;
+}
+
+void set_timeout(GtkWidget *widget,IS_SELECT *is_select)
+{}
+
+void screenshot(GtkWidget *widget,IS_SELECT *is_select)
+{}

@@ -2,8 +2,9 @@
 
 GdkPixbuf *iscreenshot_get_root_window(time_t t)
 {
-	GdkPixbuf *pixbuf=malloc(sizeof(GdkPixbuf));
-	GdkWindow win;
+	//GdkPixbuf *pixbuf=malloc(sizeof(GdkPixbuf));
+	GdkPixbuf *pixbuf;
+	GdkWindow *win;
 	int width;
 	int height;
 

@@ -112,7 +112,8 @@ void iscreenshot_rect_select_area_move(GtkWidget *widget,
 
 GdkPixbuf *iscreenshot_rect_select_pixbuf(GdkWindow *root,IS_RECT *data)
 {
-	GdkPixbuf *pixbuf=malloc(sizeof(GdkPixbuf));
+	//GdkPixbuf *pixbuf=malloc(sizeof(GdkPixbuf));
+	GdkPixbuf *pixbuf;
 
 	pixbuf=gdk_pixbuf_get_from_drawable(NULL,root,NULL,
 			data->x,data->y,0,0,

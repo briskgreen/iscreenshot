@@ -19,7 +19,11 @@ typedef struct
 
 void really_quit(GtkWidget *widget,gpointer data);
 
-void set_select(GtkWidget *widget,IS_SELECT *is_select);
+void set_get_root_window(GtkWidget *widget,gpointer data);
+
+void set_get_active_window(GtkWidget *widget,gpointer data);
+
+void set_get_rectangle_window(GtkWidget *widget,gpointer data);
 
 void set_timeout(GtkWidget *widget,IS_SELECT *is_select);
 

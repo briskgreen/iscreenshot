@@ -1,4 +1,5 @@
 #include "callback.h"
+#include <string.h>
 
 void change_path(const char *path);
 void init_data(IS_SELECT *is_select);
@@ -107,7 +108,7 @@ void create_title_screen(GtkWidget *vbox)
 	GtkWidget *label;
 
 	frame=gtk_frame_new("IScreenshot");
-	image=gtk_image_new_from_file("image/iscreenshot.png");
+	image=gtk_image_new_from_file("img/64x64/iscreenshot.png");
 	hbox=gtk_hbox_new(TRUE,10);
 	label=gtk_label_new("Screenshot\nTake a screenshot");
 
@@ -122,32 +123,31 @@ void create_title_screen(GtkWidget *vbox)
 void create_radio_button(GtkWidget *frame,IS_SELECT *is_select)
 {
 	GtkWidget *radio;
-	GtkWidget *vboxl
-	GSlist *group;
+	GtkWidget *vbox;
+	GSList *group;
 	int i;
 	const char *label[]={"Get Root Window",
 	"Get Active Window",
 	"Get Rectrangle Window",NULL};
-	/*callback func[3]={set_get_root_window,
+	callback func[3]={set_get_root_window,
 	set_get_active_window,
-	set_get_rectangle_window};*/
+	set_get_rectangle_window};
 
 	vbox=gtk_vbox_new(FALSE,0);
 	gtk_container_add(GTK_CONTAINER(frame),vbox);
 
 	radio=gtk_radio_button_new_with_label(NULL,label[0]);
 	g_signal_connect(G_OBJECT(radio),"pressed",
-			G_CALLBACK(set_select),is_select);
+			G_CALLBACK(func[0]),is_select);
 	gtk_box_pack_start(GTK_BOX(vbox),radio,FALSE,FALSE,0);
 
-	for(i=1;label[i-1] != NULL;++i)
+	for(i=1;label[i] != NULL;++i)
 	{
 		group=gtk_radio_button_get_group(GTK_RADIO_BUTTON(radio));
 		radio=gtk_radio_button_new_with_label(group,label[i]);
 
-		is_select->is_index=i+1;
 		g_signal_connect(G_OBJECT(radio),"pressed",
-				G_CALLBACK(set_select),is_select);
+				G_CALLBACK(func[i]),is_select);
 
 		gtk_box_pack_start(GTK_BOX(vbox),radio,FALSE,FALSE,0);
 	}
@@ -159,10 +159,10 @@ void create_select_time(GtkWidget *frame,IS_SELECT *is_select)
 {
 	GtkWidget *hbox;
 	GtkWidget *spin;
-	GtkWidget *labek;
+	GtkWidget *label;
 
 	hbox=gtk_hbox_new(FALSE,0);
-	gtk_container_add(GTK_CONTAINER(frame),hbox,FALSE,FALSE,0);
+	gtk_container_add(GTK_CONTAINER(frame),hbox);
 
 	spin=gtk_spin_button_new_with_range(0,60,TRUE);
 	gtk_box_pack_start(GTK_BOX(hbox),spin,FALSE,FALSE,0);

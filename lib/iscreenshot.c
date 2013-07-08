@@ -2,6 +2,6 @@
 
 void error_quit(const char *msg)
 {
-	prror(msg);
+	perror(msg);
 	exit(-1);
 }

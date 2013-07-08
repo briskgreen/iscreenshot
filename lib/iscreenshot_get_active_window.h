@@ -3,7 +3,9 @@
 #ifndef _ISCREENSHOT_GET_ACTIVE_WINDOW_H
 #define _ISCREENSHOT_GET_ACTIVE_WINDOW_H
 
-#include "iscreenshot.h"
+#include <gtk/gtk.h>
+#include <stdlib.h>
+#include <time.h>
 
 GdkPixbuf *iscreenshot_get_active_window(time_t t);
 

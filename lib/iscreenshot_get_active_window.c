@@ -17,7 +17,8 @@ void set_size(int *x,int *y,int *width,int *height,int _width,int _height)
 
 GdkPixbuf *iscreenshot_get_active_window(time_t t)
 {
-	GdkPixbuf *pixbuf=malloc(sizeof(GdkPixbuf));
+	//GdkPixbuf *pixbuf=malloc(sizeof(GdkPixbuf));
+	GdkPixbuf *pixbuf;
 	GdkScreen *screen;
 	GdkWindow *win;
 	int width;
