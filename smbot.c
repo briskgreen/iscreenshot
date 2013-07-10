@@ -357,7 +357,6 @@ char *torrent(int sockfd,char *msg)
 			break;
 		else
 			temp[j]=msg[i];
-	printf("temp=%s\n",temp);
 	len+=strlen(temp);
 	buf=malloc(len+1);
 	bzero(buf,len+1);
@@ -369,7 +368,6 @@ char *torrent(int sockfd,char *msg)
 	send(sockfd,host,strlen(host),0);
 	send(sockfd,content_type,strlen(content_type),0);
 	send(sockfd,connection,strlen(connection),0);
-	printf("%s%s%s%s",buf,host,content_type,connection);
 
 	free(buf);
 	buf=NULL;
@@ -395,16 +393,13 @@ char *torrent(int sockfd,char *msg)
 			break;
 		else
 			temp[j]=buf[i];
-	printf("%s\n",temp);
 
 	free(buf);
 	buf=NULL;
 
-	printf("temp=%d\n",strlen(temp));
 	buf=malloc(strlen(temp)+1);
 	bzero(buf,strlen(temp)+1);
 	strncpy(buf,temp,strlen(temp));
-	printf("re=%s\n",buf);
 	
 	return buf;
 }
@@ -424,7 +419,7 @@ char *get_magnet(int sockfd,char *url)
 	bzero(buf,len+1);
 
 	strncpy(buf,"GET ",strlen("GET "));
-	strncat(buf,temp,strlen(temp));
+	strncat(buf,url,strlen(url));
 	strncat(buf," HTTP/1.1\r\n",strlen(" HTTP/1.1\r\n"));
 
 	send(sockfd,buf,strlen(buf),0);
@@ -457,8 +452,11 @@ char *get_magnet(int sockfd,char *url)
 
 	temp=malloc(len+3);
 	bzero(temp,len+3);
-	for(i=0;len;++j,--len)
-		temp[i]=buf[j];
+	for(i=0;buf[j];++j,--len,++i)
+		if(buf[j] == '<')
+			break;
+		else
+			temp[i]=buf[j];
 	strncat(temp,"\r\n",strlen("\r\n"));
 	
 	free(buf);
@@ -534,7 +532,7 @@ int main(int argc,char **argv)
 
 			printf("%s\n",buf);
 
-			/*msgto(sockfd,CHANNEL,get_nick(buf),"该搜索可能会比较慢，请耐心等待，在此期间也希望不要再呼叫我!\r\n");
+			msgto(sockfd,CHANNEL,get_nick(buf),"该搜索可能会比较慢，请耐心等待，在此期间也希望不要再呼叫我!\r\n");
 			man=conect_man("www.torrentkitty.com",80);
 			temp=torrent(man,buf);
 			close(man);
@@ -548,8 +546,8 @@ int main(int argc,char **argv)
 
 			free(temp);
 			temp=NULL;
-			close(man);*/
-			msgto(sockfd,CHANNEL,get_nick(buf),"由于无法连接到torrentkitty，所以暂时关闭该功能!\r\n");
+			close(man);
+			//msgto(sockfd,CHANNEL,get_nick(buf),"由于无法连接到torrentkitty，所以暂时关闭该功能!\r\n");
 		}
 
 		if(strstr(buf,"!list") && strstr(buf,"PRIVMSG"))
