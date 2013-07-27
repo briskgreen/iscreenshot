@@ -27,3 +27,9 @@ iscreenshot_save.o:lib/iscreenshot_save.c
 
 clean:
 	rm iscreenshot *.o
+
+install:
+	install.sh
+
+uninstall:
+	rm -rf /usr/local/iscreenshot/

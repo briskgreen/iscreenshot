@@ -15,6 +15,7 @@ GdkPixbuf *iscreenshot_get_rectangle_window(GdkColor *color,
 	screen=gdk_screen_get_default();
 	win=gtk_window_new(GTK_WINDOW_POPUP);
 	gtk_widget_set_app_paintable(win,TRUE);
+	//设置当前窗口可画
 
 	data.pressed=FALSE;
 	data.opacity=opacity;
@@ -37,10 +38,12 @@ GdkPixbuf *iscreenshot_get_rectangle_window(GdkColor *color,
 	gtk_window_resize(GTK_WINDOW(win),
 			gdk_screen_get_width(screen),
 			gdk_screen_get_height(screen));
+	//将窗口最大化并设置全透明，为得是能够侦听鼠标信号
 
 	gdk_window_set_cursor(gdk_get_default_root_window(),
 			gdk_cursor_new(GDK_CROSSHAIR));
 	gdk_flush();
+	//更新鼠标光标图案
 
 	gtk_widget_show_all(win);
 
@@ -50,6 +53,7 @@ GdkPixbuf *iscreenshot_get_rectangle_window(GdkColor *color,
 	gdk_window_set_cursor(gdk_get_default_root_window(),
 			gdk_cursor_new(GDK_LEFT_PTR));
 	gdk_flush();
+	//将光标图标还原
 
 	return iscreenshot_rect_select_pixbuf(gdk_get_default_root_window(),&data);
 }
@@ -62,6 +66,7 @@ void iscreenshot_rect_select_area_press(GtkWidget *widget,
 
 	gtk_window_move(GTK_WINDOW(widget),-100,-100);
 	gtk_window_resize(GTK_WINDOW(widget),10,10);
+	//将窗口移动到屏幕不可见的地方
 	gtk_window_set_opacity(GTK_WINDOW(widget),data->opacity);
 
 	data->pressed=TRUE;
@@ -80,6 +85,7 @@ void iscreenshot_rect_select_area_release(GtkWidget *widget,
 	data->x=MIN(data->x,event->x_root);
 	data->y=MIN(data->y,event->y_root);
 	data->pressed=FALSE;
+	//得到鼠标当前的位置
 
 	gtk_widget_destroy(widget);
 	gtk_main_quit();
@@ -108,6 +114,7 @@ void iscreenshot_rect_select_area_move(GtkWidget *widget,
 
 	gtk_window_move(GTK_WINDOW(widget),draw.x,draw.y);
 	gtk_window_resize(GTK_WINDOW(widget),draw.width,draw.height);
+	//将窗口移动到相应位置并画出来
 }
 
 GdkPixbuf *iscreenshot_rect_select_pixbuf(GdkWindow *root,IS_RECT *data)

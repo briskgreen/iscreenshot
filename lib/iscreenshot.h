@@ -1,5 +1,11 @@
 /*iscreenshot库头文件
- *定义一些全局变量和数据结构
+ * 该头文件包含了所有iscreenshot所需要的头文件
+ * 作者:炕头哥
+ * Copyright © 2013-07 By 炕头哥
+ * 许可协议:libiscreenshot遵循LGPL许可协议发布
+ * 联系作者:briskgreen@163.com
+ * 对于LGPL许可土方的具体内容可参考下面的连接
+ * http://www.gnu.org/licenses/lgpl.html
  */
 
 #ifndef _ISCREENSHOT_H

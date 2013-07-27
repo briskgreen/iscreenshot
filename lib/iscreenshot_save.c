@@ -73,6 +73,7 @@ void iscreenshot_save_to_file(GtkWidget *widget,GdkPixbuf *pixbuf)
 	strncpy(file_name,name,strlen(name));
 	strncat(file_name,temp,strlen(temp)-1);
 	strncat(file_name,png,strlen(png));
+	//以IScreenShot <系统晨间>.png为文件名
 
 	file=gtk_file_chooser_dialog_new("Save File",NULL,
 			GTK_FILE_CHOOSER_ACTION_SAVE,
@@ -135,6 +136,7 @@ void iscreenshot_save_only_show(GtkWidget *widget,GdkPixbuf *pixbuf)
 			width/=2;
 			height/=2;
 		}
+	//如果截取的图的宽度和高度较大则进行缩放
 
 	temp=gdk_pixbuf_scale_simple(pixbuf,width,height,GDK_INTERP_BILINEAR);
 	image=gtk_image_new_from_pixbuf(temp);

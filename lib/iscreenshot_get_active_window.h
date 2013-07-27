@@ -8,5 +8,6 @@
 #include <time.h>
 
 GdkPixbuf *iscreenshot_get_active_window(time_t t);
+/*参数t表示等候的时间*/
 
 #endif
