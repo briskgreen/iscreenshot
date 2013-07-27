@@ -1,4 +1,4 @@
-IScreenShot
+IScreenshot
 ===========
 
 Copyright © 2013-07 By 炕头哥
