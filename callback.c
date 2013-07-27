@@ -59,7 +59,9 @@ void set_get_rectangle_window(GtkWidget *widget,gpointer data)
 }
 
 void set_timeout(GtkWidget *widget,IS_SELECT *is_select)
-{}
+{
+	is_select->is_time=gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
+}
 
 void screenshot(GtkWidget *widget,IS_SELECT *is_select)
 {

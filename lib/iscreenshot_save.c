@@ -112,4 +112,35 @@ void iscreenshot_save_to_clipboard(GtkWidget *widget,GdkPixbuf *pixbuf)
 }
 
 void iscreenshot_save_only_show(GtkWidget *widget,GdkPixbuf *pixbuf)
-{}
+{
+	GtkWidget *image;
+	GtkWidget *dialog;
+	GdkPixbuf *temp;
+	int width;
+	int height;
+
+	dialog=gtk_dialog_new();
+
+	width=gdk_pixbuf_get_width(pixbuf);
+	height=gdk_pixbuf_get_height(pixbuf);
+	if(width > 1024)
+		while(width > 1024)
+		{
+			width/=2;
+			height/=2;
+		}
+	if(height > 768)
+		while(height > 768)
+		{
+			width/=2;
+			height/=2;
+		}
+
+	temp=gdk_pixbuf_scale_simple(pixbuf,width,height,GDK_INTERP_BILINEAR);
+	image=gtk_image_new_from_pixbuf(temp);
+	gtk_widget_show(image);
+
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox),image,TRUE,TRUE,0);
+	gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_main_quit();
+}
