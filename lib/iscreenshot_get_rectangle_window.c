@@ -35,6 +35,7 @@ GdkPixbuf *iscreenshot_get_rectangle_window(GdkColor *color,
 		gtk_widget_modify_bg(win,GTK_STATE_NORMAL,color);
 
 	gtk_window_set_opacity(GTK_WINDOW(win),0);
+	gtk_widget_realize(win);
 	gtk_window_resize(GTK_WINDOW(win),
 			gdk_screen_get_width(screen),
 			gdk_screen_get_height(screen));
